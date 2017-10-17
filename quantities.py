@@ -28,14 +28,15 @@ class QuantityInstance():
     the derivative
     """
     def __init__(self, quantity, magnitude, derivative):
+        self.DERIV_ALPHABET = ["minus", "zero", "plus"]
         self.quantity = quantity
         if magnitude not in self.quantity.alphabet:
             raise ValueError("Not a value in {}\'s alphabet: {}".format(
                 self.quantity.name, list(self.quantity.alphabet.keys())
             ))
-        if derivative not in ["minus", "zero", "plus"]:
+        if derivative not in self.DERIV_ALPHABET:
             raise ValueError("Not a valid value for a derivative: {}".format(
-                list(self.quantity.alphabet.keys())
+                self.DERIV_ALPHABET
             ))
         self.magnitude = magnitude
         self.derivative = derivative
@@ -65,8 +66,8 @@ class QuantityInstance():
 
     @derivative.setter
     def derivative(self, deriv):
-        if deriv not in self.quantity.alphabet:
+        if deriv not in self.DERIV_ALPHABET:
             raise ValueError("Not a value in {}\'s alphabet: {}".format(
-                self.quantity.name, list(self.quantity.alphabet.keys())
+                self.quantity.name, list(self.DERIV_ALPHABET)
             ))
         self.__derivative = deriv

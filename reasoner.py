@@ -15,28 +15,36 @@ class QRReasoner():
     def __init__(self, model_quantities, model_dependencies):
         self.qns = model_quantities
         self.dcs = model_dependencies
-        DERIV_ALPHABET = ["minus", "zero", "plus"]
 
     def deriv_to_magnitude(self, state):
         """
         Rule: nonzero derivative and zero magnitude --> nonzero magnitude
         """
+        changed = False
         for node in state:
             if node.magnitude == "zero":
                 if node.derivative == "minus":
                     node.magnitude = "minus"
+                    changed = True
                 elif node.derivative == "plus":
                     node.magnitude = "plus"
-        return state
+                    changed = True
+        return changed, state
 
     def pos_inf(self, origin, target):
         """Positive influence relation between origin and target"""
         changed = False
-        if origin.magnitude == "plus" and target.derivative == "zero":
+        if origin.magnitude == "plus" and target.derivative == "zero" and target.derivative != "plus":
             target.derivative = "plus"
             changed = True
-        elif origin.magnitude == "minus" and target.derivative == "zero":
+        elif origin.magnitude == "plus" and target.derivative == "minus" and target.derivative != "zero":
+            target.derivative = "zero"
+            changed = True
+        elif origin.magnitude == "minus" and target.derivative == "zero" and target.derivative != "minus":
             target.derivative = "minus"
+            changed = True
+        elif origin.magnitude == "minus" and target.derivative == "plus" and target.derivative != "zero":
+            target.derivative = "zero"
             changed = True
         return changed, origin, target
 
@@ -46,8 +54,14 @@ class QRReasoner():
         if origin.magnitude == "plus" and target.derivative == "zero" and target.derivative != "minus":
             target.derivative = "minus"
             changed = True
+        elif origin.magnitude == "plus" and target.derivative == "plus" and target.derivative != "zero":
+            target.derivative = "zero"
+            changed = True
         elif origin.magnitude == "minus" and target.derivative == "zero" and target.derivative != "plus":
             target.derivative = "plus"
+            changed = True
+        elif origin.magnitude == "minus" and target.derivative == "minus" and target.derivative != "zero":
+            target.derivative = "zero"
             changed = True
         return changed, origin, target
 
@@ -157,28 +171,43 @@ class QRReasoner():
         """
         Generates possible states based on the model quantities, their
         relations and an initial state.
-        New states are generated using propagation rules. If one of the rules
-        has changed the state, we return that state and stop applying other
-        rules.
         """
-        # Save initial state to check if anything changed at the end
-        begin_state = deepcopy(state)
-        updated_state = self.deriv_to_magnitude(state)
-        if updated_state != begin_state:
+        # Make a list of newly reached states, which will be put back into this
+        # function
+        new_states = []
+        # Propagate derivative to magnitude, this is always allowed and will
+        # not generate a new state immediately, but the state with the
+        # propagation is checked for applicable rules
+        ch, updated_state = self.deriv_to_magnitude(state)
+        if ch:
             state = updated_state
 
+        # Save the original state which we can use to search for other
+        # applicable rules from the current state
+        original_state = deepcopy(state)
+
         for rule in self.dcs:
-            # Handle influence rule
-            if rule.name == "Influence" and rule.sign == "positive":
+            if rule.name == "Influence":
                 ch, updated_state = self.influence_rule(rule, state)
                 if ch:
-                    print("Applied influence")
-                    return updated_state
-            # Handle proportional rule
-            if rule.name == "Proportional" and rule.sign == "positive":
+                    # We applied the influence rule, so put the new state in
+                    # a list of newly generated states.
+                    # print("Applied influence")
+                    new_states.append(updated_state)
+                    # Continue with applying other rules with the original
+                    # state
+                    state = deepcopy(original_state)
+
+            if rule.name == "Proportional":
                 ch, updated_state = self.proportional_rule(rule, state)
                 if ch:
-                    print("Applied proportional")
-                    return updated_state
+                    # We applied the proportional rule, so put the new state in
+                    # a list of newly generated states.
+                    # print("Applied proportional")
+                    new_states.append(updated_state)
+                    # Continue with applying other rules with the original
+                    # state
+                    state = deepcopy(original_state)
+
         # Nothing happened, return the unchanged state
-        return state
+        return new_states
