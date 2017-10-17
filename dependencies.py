@@ -13,7 +13,7 @@ class Dependency():
         self.target = target
 
     def __repr__(self):
-        return "Dependency: \"{}\" from {} to {}".format(self.name, self.origin, self.target)
+        return "\"{}\" from {} to {}".format(self.name, self.origin.name, self.target.name)
 
 
 class ValueCorrespondence(Dependency):
@@ -39,6 +39,9 @@ class Influence(Dependency):
         super().__init__("Influence", origin, target)
         self.sign = sign
 
+    def __repr__(self):
+        return "{} with {} sign".format(super().__repr__(), self.sign)
+
 
 class Proportional(Dependency):
     """
@@ -47,3 +50,6 @@ class Proportional(Dependency):
     def __init__(self, origin, target, sign):
         super().__init__("Proportional", origin, target)
         self.sign = sign
+
+    def __repr__(self):
+        return "{} with {} sign".format(super().__repr__(), self.sign)
