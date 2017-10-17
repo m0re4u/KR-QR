@@ -20,15 +20,15 @@ class ValueCorrespondence(Dependency):
     """
     Specifies a value correspondence between two values of quantities
     """
-    def __init__(self, origin, target, object_value, target_value):
+    def __init__(self, origin, target, origin_value, target_value):
         super().__init__("VC", origin, target)
-        self.object_value = object_value
+        self.origin_value = origin_value
         self.target_value = target_value
 
     def __repr__(self):
         # Overloaded string representation because we want the name of the
         # quantities as well
-        return "{} between values {} and {}".format(super().__repr__(), self.object_value, self.target_value)
+        return "{} between values {} and {}".format(super().__repr__(), self.origin_value, self.target_value)
 
 
 class Influence(Dependency):

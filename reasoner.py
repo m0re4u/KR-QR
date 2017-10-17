@@ -1,7 +1,7 @@
 # author: Michiel van der Meer - 2017
 # Knowledge Representation course, QR project
 import quantities as qn
-from copy import deepcopy
+import itertools
 
 
 class QRReasoner():
@@ -16,198 +16,68 @@ class QRReasoner():
         self.qns = model_quantities
         self.dcs = model_dependencies
 
-    def deriv_to_magnitude(self, state):
-        """
-        Rule: nonzero derivative and zero magnitude --> nonzero magnitude
-        """
-        changed = False
-        for node in state:
-            if node.magnitude == "zero":
-                if node.derivative == "minus":
-                    node.magnitude = "minus"
-                    changed = True
-                elif node.derivative == "plus":
-                    node.magnitude = "plus"
-                    changed = True
-        return changed, state
+    def find_influences(self, instance):
+        # Find the influences that can affect the value of the derivative of
+        # the considered instance
+        infs = []
+        for dep in self.dcs:
+            if dep.target == instance.quantity and dep.name == "Influence":
+                infs.append(dep)
+        return infs
 
-    def pos_inf(self, origin, target):
-        """Positive influence relation between origin and target"""
-        changed = False
-        if origin.magnitude == "plus" and target.derivative == "zero" and target.derivative != "plus":
-            target.derivative = "plus"
-            changed = True
-        elif origin.magnitude == "plus" and target.derivative == "minus" and target.derivative != "zero":
-            target.derivative = "zero"
-            changed = True
-        elif origin.magnitude == "minus" and target.derivative == "zero" and target.derivative != "minus":
-            target.derivative = "minus"
-            changed = True
-        elif origin.magnitude == "minus" and target.derivative == "plus" and target.derivative != "zero":
-            target.derivative = "zero"
-            changed = True
-        return changed, origin, target
+    def find_value(self, state, quantity):
+        # Find the instansiated value of a quantity
+        for value in state:
+            if value.quantity == quantity:
+                return value
+        return None
 
-    def neg_inf(self, origin, target):
-        """Negative influence relation between origin and target"""
-        changed = False
-        if origin.magnitude == "plus" and target.derivative == "zero" and target.derivative != "minus":
-            target.derivative = "minus"
-            changed = True
-        elif origin.magnitude == "plus" and target.derivative == "plus" and target.derivative != "zero":
-            target.derivative = "zero"
-            changed = True
-        elif origin.magnitude == "minus" and target.derivative == "zero" and target.derivative != "plus":
-            target.derivative = "plus"
-            changed = True
-        elif origin.magnitude == "minus" and target.derivative == "minus" and target.derivative != "zero":
-            target.derivative = "zero"
-            changed = True
-        return changed, origin, target
+    def generate_states(self):
+        qspace = [(k, list(v.alphabet.keys())) for k, v in self.qns.items()]
+        ordered_quantities = [x[0] for x in qspace]
+        all_states = list(itertools.product(*[x[1] for x in qspace], *[qn.DERIV_ALPHABET] * 3))
+        all_instances = []
+        for state in all_states:
+            instance = []
+            for i, quantity in enumerate(self.qns):
+                instance.append(qn.QuantityInstance(self.qns[ordered_quantities[i]], state[i], state[i + len(self.qns)]))
+            all_instances.append(instance)
+        return all_instances
 
-    def influence_rule(self, rule, state):
-        """
-        Rule:   influence relation between origin and target causes magnitude
-                of origin to influence the derivative of the target
-        """
-        # check out current model to see if we can apply the rule
-        for node in state:
-            if rule.origin == node.quantity:
-                for t_node in state:
-                    if rule.target == t_node.quantity:
-                        # Found an influence rule with its two quantities
-                        if rule.sign == "positive":
-                            ch, node, t_node = self.pos_inf(node, t_node)
-                            if ch:
-                                return True, state
-                        elif rule.sign == "negative":
-                            ch, node, t_node = self.neg_inf(node, t_node)
-                            if ch:
-                                return True, state
-        # Nothing changed, so return a false change and the same state
-        return False, state
+    def check_state(self, state):
+        for cur_quantity in state:
+            # Negative derivative and zero magnitude is impossible state
+            if cur_quantity.magnitude == "zero" and cur_quantity.derivative == "minus":
+                return False
 
-    def pos_prop(self, origin, target):
-        """Positive proportional relation between origin and target"""
-        changed = False
-        if origin.derivative == "plus" and target.derivative == "zero" and target.derivative != "plus":
-            target.derivative = "plus"
-            changed = True
-        elif origin.derivative == "plus" and target.derivative == "minus" and target.derivative != "zero":
-            target.derivative = "zero"
-            changed = True
-        elif origin.derivative == "minus" and target.derivative == "zero" and target.derivative != "minus":
-            target.derivative = "minus"
-            changed = True
-        elif origin.derivative == "minus" and target.derivative == "plus" and target.derivative != "zero":
-            target.derivative = "zero"
-            changed = True
-        elif origin.magnitude == "plus" and target.magnitude == "zero" and target.magnitude != "plus":
-            target.magnitude = "plus"
-            changed = True
-        elif origin.magnitude == "plus" and target.magnitude == "minus" and target.magnitude != "zero":
-            target.magnitude = "zero"
-            changed = True
-        elif origin.magnitude == "minus" and target.magnitude == "zero" and target.magnitude != "minus":
-            target.magnitude = "minus"
-            changed = True
-        elif origin.magnitude == "minus" and target.magnitude == "plus" and target.magnitude != "zero":
-            target.magnitude = "zero"
-            changed = True
-        return changed, origin, target
+            # Next up, check if there is an impossible derivative value in the
+            # current quantity given the incoming influence relations and the
+            # value of the origin quantities
+            rel = self.find_influences(cur_quantity)
+            if rel != []:
+                positives = len([x for x in rel if x.sign == "positive" and cur_quantity.derivative == "plus" and self.find_value(state, x.origin).magnitude == "plus"])
+                negatives = len([x for x in rel if x.sign == "negative" and cur_quantity.derivative == "plus" and self.find_value(state, x.origin).magnitude == "plus"])
+                val = positives - negatives
+                if val == -1 and cur_quantity.derivative != "minus":
+                    return False
+                if val == 0 and cur_quantity.derivative != "zero":
+                    return False
+                if val == 1 and cur_quantity.derivative != "plus":
+                    return False
 
-    def neg_prop(self, origin, target):
-        """Negative proportional relation between origin and target"""
-        changed = False
-        if origin.derivative == "plus" and target.derivative == "zero" and target.derivative != "minus":
-            target.derivative = "minus"
-            changed = True
-        elif origin.derivative == "plus" and target.derivative == "plus" and target.derivative != "zero":
-            target.derivative = "zero"
-            changed = True
-        elif origin.derivative == "minus" and target.derivative == "zero" and target.derivative != "plus":
-            target.derivative = "plus"
-            changed = True
-        elif origin.derivative == "minus" and target.derivative == "minus" and target.derivative != "zero":
-            target.derivative = "zero"
-            changed = True
-        elif origin.magnitude == "plus" and target.magnitude == "zero" and target.magnitude != "minus":
-            target.magnitude = "minus"
-            changed = True
-        elif origin.magnitude == "plus" and target.magnitude == "plus" and target.magnitude != "zero":
-            target.magnitude = "zero"
-            changed = True
-        elif origin.magnitude == "minus" and target.magnitude == "zero" and target.magnitude != "plus":
-            target.magnitude = "plus"
-            changed = True
-        elif origin.magnitude == "minus" and target.magnitude == "minus" and target.magnitude != "zero":
-            target.magnitude = "zero"
-            changed = True
-        return changed, origin, target
+        for relation in self.dcs:
+            # Remove violations of the value correspondences
+            if relation.name == "VC":
+                org = self.find_value(state, relation.origin)
+                tar = self.find_value(state, relation.target)
+                print(org.magnitude, tar.magnitude)
+                if org.magnitude != relation.origin_value and tar.magnitude != relation.target_value:
+                    return False
 
-    def proportional_rule(self, rule, state):
-        """
-        Rule:   proportional relation between origin and target causes:
-                - derivative of origin changes derivative of target
-                - magnitude of origin changes magnitude of target
-        """
-        for node in state:
-            if rule.origin == node.quantity:
-                for t_node in state:
-                    if rule.target == t_node.quantity:
-                        # Found an proportional rule with its two quantities
-                        if rule.sign == "positive":
-                            ch, node, t_node = self.pos_prop(node, t_node)
-                            if ch:
-                                return True, state
-                        elif rule.sign == "negative":
-                            ch, node, t_node = self.neg_prop(node, t_node)
-                            if ch:
-                                return True, state
-        # Nothing changed, so return a false change and the same state
-        return False, state
+        return True
 
-    def think(self, state):
-        """
-        Generates possible states based on the model quantities, their
-        relations and an initial state.
-        """
-        # Make a list of newly reached states, which will be put back into this
-        # function
-        new_states = []
-        # Propagate derivative to magnitude, this is always allowed and will
-        # not generate a new state immediately, but the state with the
-        # propagation is checked for applicable rules
-        ch, updated_state = self.deriv_to_magnitude(state)
-        if ch:
-            state = updated_state
-
-        # Save the original state which we can use to search for other
-        # applicable rules from the current state
-        original_state = deepcopy(state)
-
-        for rule in self.dcs:
-            if rule.name == "Influence":
-                ch, updated_state = self.influence_rule(rule, state)
-                if ch:
-                    # We applied the influence rule, so put the new state in
-                    # a list of newly generated states.
-                    # print("Applied influence")
-                    new_states.append(updated_state)
-                    # Continue with applying other rules with the original
-                    # state
-                    state = deepcopy(original_state)
-
-            if rule.name == "Proportional":
-                ch, updated_state = self.proportional_rule(rule, state)
-                if ch:
-                    # We applied the proportional rule, so put the new state in
-                    # a list of newly generated states.
-                    # print("Applied proportional")
-                    new_states.append(updated_state)
-                    # Continue with applying other rules with the original
-                    # state
-                    state = deepcopy(original_state)
-
-        # Nothing happened, return the unchanged state
-        return new_states
+    def think(self):
+        all_states = self.generate_states()
+        print("All states: {}".format(len(all_states)))
+        valid_states = [state for state in all_states if self.check_state(state)]
+        print("Left over states: {}".format(len(valid_states)))
