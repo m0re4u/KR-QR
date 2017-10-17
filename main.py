@@ -42,7 +42,7 @@ def main():
     ]
     print("Begin state:\n{}".format(model_instance))
     print()
-    for i in range(10):
+    for i in range(4):
         res = rs.think(model_instance)
         print("State {}:\n{}".format(i, res))
 

@@ -29,6 +29,28 @@ class QRReasoner():
                     node.magnitude = "plus"
         return state
 
+    def pos_inf(self, origin, target):
+        """Positive influence relation between origin and target"""
+        changed = False
+        if origin.magnitude == "plus" and target.derivative == "zero":
+            target.derivative = "plus"
+            changed = True
+        elif origin.magnitude == "minus" and target.derivative == "zero":
+            target.derivative = "minus"
+            changed = True
+        return changed, origin, target
+
+    def neg_inf(self, origin, target):
+        """Negative influence relation between origin and target"""
+        changed = False
+        if origin.magnitude == "plus" and target.derivative == "zero" and target.derivative != "minus":
+            target.derivative = "minus"
+            changed = True
+        elif origin.magnitude == "minus" and target.derivative == "zero" and target.derivative != "plus":
+            target.derivative = "plus"
+            changed = True
+        return changed, origin, target
+
     def influence_rule(self, rule, state):
         """
         Rule:   influence relation between origin and target causes magnitude
@@ -40,13 +62,74 @@ class QRReasoner():
                 for t_node in state:
                     if rule.target == t_node.quantity:
                         # Found an influence rule with its two quantities
-                        if node.magnitude == "plus" and t_node.derivative == "zero":
-                            t_node.derivative = "plus"
-                            return state
-                        if node.magnitude == "minus" and t_node.derivative == "zero":
-                            t_node.derivative = "minus"
-                            return state
-        return state
+                        if rule.sign == "positive":
+                            ch, node, t_node = self.pos_inf(node, t_node)
+                            if ch:
+                                return True, state
+                        elif rule.sign == "negative":
+                            ch, node, t_node = self.neg_inf(node, t_node)
+                            if ch:
+                                return True, state
+        # Nothing changed, so return a false change and the same state
+        return False, state
+
+    def pos_prop(self, origin, target):
+        """Positive proportional relation between origin and target"""
+        changed = False
+        if origin.derivative == "plus" and target.derivative == "zero" and target.derivative != "plus":
+            target.derivative = "plus"
+            changed = True
+        elif origin.derivative == "plus" and target.derivative == "minus" and target.derivative != "zero":
+            target.derivative = "zero"
+            changed = True
+        elif origin.derivative == "minus" and target.derivative == "zero" and target.derivative != "minus":
+            target.derivative = "minus"
+            changed = True
+        elif origin.derivative == "minus" and target.derivative == "plus" and target.derivative != "zero":
+            target.derivative = "zero"
+            changed = True
+        elif origin.magnitude == "plus" and target.magnitude == "zero" and target.magnitude != "plus":
+            target.magnitude = "plus"
+            changed = True
+        elif origin.magnitude == "plus" and target.magnitude == "minus" and target.magnitude != "zero":
+            target.magnitude = "zero"
+            changed = True
+        elif origin.magnitude == "minus" and target.magnitude == "zero" and target.magnitude != "minus":
+            target.magnitude = "minus"
+            changed = True
+        elif origin.magnitude == "minus" and target.magnitude == "plus" and target.magnitude != "zero":
+            target.magnitude = "zero"
+            changed = True
+        return changed, origin, target
+
+    def neg_prop(self, origin, target):
+        """Negative proportional relation between origin and target"""
+        changed = False
+        if origin.derivative == "plus" and target.derivative == "zero" and target.derivative != "minus":
+            target.derivative = "minus"
+            changed = True
+        elif origin.derivative == "plus" and target.derivative == "plus" and target.derivative != "zero":
+            target.derivative = "zero"
+            changed = True
+        elif origin.derivative == "minus" and target.derivative == "zero" and target.derivative != "plus":
+            target.derivative = "plus"
+            changed = True
+        elif origin.derivative == "minus" and target.derivative == "minus" and target.derivative != "zero":
+            target.derivative = "zero"
+            changed = True
+        elif origin.magnitude == "plus" and target.magnitude == "zero" and target.magnitude != "minus":
+            target.magnitude = "minus"
+            changed = True
+        elif origin.magnitude == "plus" and target.magnitude == "plus" and target.magnitude != "zero":
+            target.magnitude = "zero"
+            changed = True
+        elif origin.magnitude == "minus" and target.magnitude == "zero" and target.magnitude != "plus":
+            target.magnitude = "plus"
+            changed = True
+        elif origin.magnitude == "minus" and target.magnitude == "minus" and target.magnitude != "zero":
+            target.magnitude = "zero"
+            changed = True
+        return changed, origin, target
 
     def proportional_rule(self, rule, state):
         """
@@ -56,17 +139,19 @@ class QRReasoner():
         """
         for node in state:
             if rule.origin == node.quantity:
-                # Found a rule applying to a node we have
                 for t_node in state:
-                    # find the target node
                     if rule.target == t_node.quantity:
-                        if node.derivative == "plus" and t_node.derivative == "zero":
-                            t_node.derivative = "plus"
-                            return state
-                        if node.derivative == "minus" and t_node.derivative == "zero":
-                            t_node.derivative = "minus"
-                            return state
-        return state
+                        # Found an proportional rule with its two quantities
+                        if rule.sign == "positive":
+                            ch, node, t_node = self.pos_prop(node, t_node)
+                            if ch:
+                                return True, state
+                        elif rule.sign == "negative":
+                            ch, node, t_node = self.neg_prop(node, t_node)
+                            if ch:
+                                return True, state
+        # Nothing changed, so return a false change and the same state
+        return False, state
 
     def think(self, state):
         """
@@ -80,18 +165,20 @@ class QRReasoner():
         begin_state = deepcopy(state)
         updated_state = self.deriv_to_magnitude(state)
         if updated_state != begin_state:
-            return updated_state
+            state = updated_state
 
         for rule in self.dcs:
             # Handle influence rule
             if rule.name == "Influence" and rule.sign == "positive":
-                updated_state = self.influence_rule(rule, state)
-                if updated_state != begin_state:
+                ch, updated_state = self.influence_rule(rule, state)
+                if ch:
+                    print("Applied influence")
                     return updated_state
             # Handle proportional rule
             if rule.name == "Proportional" and rule.sign == "positive":
-                updated_state = self.proportional_rule(rule, state)
-                if updated_state != begin_state:
+                ch, updated_state = self.proportional_rule(rule, state)
+                if ch:
+                    print("Applied proportional")
                     return updated_state
         # Nothing happened, return the unchanged state
         return state
