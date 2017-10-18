@@ -11,26 +11,12 @@ import reasoner
 
 
 def draw_nodes(states, transitions):
-    G = nx.Graph()
-    nodes = []
-    for i, state in enumerate(states):
-        # (x,y) coordinate
+    G = nx.DiGraph()
+    for i, state in states:
         G.add_node(i)
-        nodes.append((i, state))
 
-    edges = []
-    for trans in transitions:
-        origin = None
-        target = None
-        for i, node in nodes:
-            for trans in transitions:
-                if trans[0] == node:
-                    for j, target in nodes:
-                        if trans[1] == target:
-                            edges.append((i, j))
-
-    for edge in edges:
-        G.add_edge(edge[0], edge[1])
+    for transition in transitions:
+        G.add_edge(transition[0], transition[1])
 
     # draw graph
     pos = nx.shell_layout(G)

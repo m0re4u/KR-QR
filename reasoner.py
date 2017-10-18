@@ -81,11 +81,62 @@ class QRReasoner():
                     return False
         return True
 
+    def find_origin_target(self, transition, all_states):
+        origin = None
+        target = None
+        for state in all_states:
+            if transition[0] == state[0]:
+                origin = state[1]
+            if transition[1] == state[0]:
+                target = state[1]
+        return origin, target
+
+    def find_change(self, origin, target):
+        changes = []
+        for quantity in origin:
+            for new_quantity in target:
+                if new_quantity.quantity.name == quantity.quantity.name:
+                    if quantity.magnitude != new_quantity.magnitude:
+                        changes.append((quantity.quantity.name, "magnitude", quantity.magnitude, new_quantity.magnitude))
+                    if quantity.derivative != new_quantity.derivative:
+                        changes.append((quantity.quantity.name, "derivative", quantity.derivative, new_quantity.derivative))
+        return changes
+
+    def generate_transitions(self, states):
+        inds = [x[0] for x in states]
+        print(inds)
+        connections = []
+        for ind in inds:
+            print(ind)
+            connections.extend([(ind, x) for x in inds if x != ind])
+        return connections
+
+    def check_transition(self, transition, states):
+        origin, target = self.find_origin_target(transition, states)
+        # Check if there is an exogenous variable change
+        changes = self.find_change(origin, target)
+        # change = (name, magnitude/derivative, prevalue, postvalue)
+        for change in changes:
+            # Inflow derivative is exogenous
+            if change[0] == "Inflow" and change[1] == "derivative":
+                return False
+
+        return True
+
     def think(self):
         all_states = self.generate_states()
         print("All states: {}".format(len(all_states)))
         valid_states = [
-            state for state in all_states if self.check_state(state)]
-
+            state for state in all_states if self.check_state(state)
+        ]
         print("Reduced to: {}".format(len(valid_states)))
-        return valid_states
+        indexed_states = [(i, x) for i, x in enumerate(valid_states)]
+
+        all_transitions = self.generate_transitions(indexed_states)
+        print("All transitions: {}".format(len(all_transitions)))
+        indexed_transitions = [
+            transition for transition in all_transitions
+            if self.check_transition(transition, indexed_states)
+        ]
+        print("Reduced to: {}".format(len(indexed_transitions)))
+        return indexed_states, indexed_transitions
