@@ -112,6 +112,10 @@ class QRReasoner():
         return connections
 
     def check_transition(self, transition, states):
+        """
+        Check if a transition is possible, and show an explanation as to why
+        it is.
+        """
         origin, target = self.find_origin_target(transition, states)
         # Check if there is an exogenous variable change
         changes = self.find_change(origin, target)
@@ -120,8 +124,7 @@ class QRReasoner():
             # Inflow derivative is exogenous
             if change[0] == "Inflow" and change[1] == "derivative":
                 return False
-
-        return True
+        return False
 
     def think(self):
         all_states = self.generate_states()
