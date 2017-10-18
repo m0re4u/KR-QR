@@ -104,10 +104,8 @@ class QRReasoner():
 
     def generate_transitions(self, states):
         inds = [x[0] for x in states]
-        print(inds)
         connections = []
         for ind in inds:
-            print(ind)
             connections.extend([(ind, x) for x in inds if x != ind])
         return connections
 
@@ -128,7 +126,7 @@ class QRReasoner():
 
     def think(self):
         all_states = self.generate_states()
-        print("All states: {}".format(len(all_states)))
+        print("Generated all states: {}".format(len(all_states)))
         valid_states = [
             state for state in all_states if self.check_state(state)
         ]
@@ -136,7 +134,7 @@ class QRReasoner():
         indexed_states = [(i, x) for i, x in enumerate(valid_states)]
 
         all_transitions = self.generate_transitions(indexed_states)
-        print("All transitions: {}".format(len(all_transitions)))
+        print("Generated all transitions: {}".format(len(all_transitions)))
         indexed_transitions = [
             transition for transition in all_transitions
             if self.check_transition(transition, indexed_states)

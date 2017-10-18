@@ -35,40 +35,13 @@ def main(filename):
         )
     ]
     print("Model created!")
-    # print("Quantities: {}".format(model_qns))
-    # print("Relations: {}".format(model_dcs))
     print()
     rs = reasoner.QRReasoner(model_qns, model_dcs)
-    model_instance = [
-        qn.QuantityInstance(model_qns["Inflow"], "zero", "plus"),
-        qn.QuantityInstance(model_qns["Volume"], "zero", "zero"),
-        qn.QuantityInstance(model_qns["Outflow"], "zero", "zero")
-    ]
-    print("Begin state:\n{}".format(model_instance))
-    # print()
-    # print()
-    # unseen_states = []
-    # state_list = []
-    # transitions = []
-    # unseen_states.extend(rs.think(model_instance))
-    # while unseen_states != []:
-    #     # Select a state to continue with
-    #     selection = unseen_states.pop()
-    #     # print(selection)
-    #     # Copy the current selection to the list of processed states
-    #     state_list.append(deepcopy(selection))
-    #     # Apply rules on the current state, generating new states
-    #     new_states = rs.think(selection)
-    #     # For the new states, check if we have seen them before, and put them
-    #     # in the queue if we have not
-    #     for state in new_states:
-    #         trans = (selection, state)
-    #         if trans not in transitions:
-    #             transitions.append(trans)
-    #         if state not in state_list:
-    #             unseen_states.append(state)
-
     state_list, transitions = rs.think()
+
+    print("Possible states:")
+    for i, state in state_list:
+        print("  State: {} --> {}".format(i, state))
     with open(filename, "wb") as outfile:
         pickle.dump({"states": state_list, "transitions": transitions}, outfile)
 
