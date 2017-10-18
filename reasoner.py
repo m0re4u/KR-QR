@@ -35,12 +35,14 @@ class QRReasoner():
     def generate_states(self):
         qspace = [(k, list(v.alphabet.keys())) for k, v in self.qns.items()]
         ordered_quantities = [x[0] for x in qspace]
-        all_states = list(itertools.product(*[x[1] for x in qspace], *[qn.DERIV_ALPHABET] * 3))
+        all_states = list(itertools.product(
+            *[x[1] for x in qspace], *[qn.DERIV_ALPHABET] * 3))
         all_instances = []
         for state in all_states:
             instance = []
             for i, quantity in enumerate(self.qns):
-                instance.append(qn.QuantityInstance(self.qns[ordered_quantities[i]], state[i], state[i + len(self.qns)]))
+                instance.append(qn.QuantityInstance(
+                    self.qns[ordered_quantities[i]], state[i], state[i + len(self.qns)]))
             all_instances.append(instance)
         return all_instances
 
@@ -55,8 +57,10 @@ class QRReasoner():
             # value of the origin quantities
             rel = self.find_influences(cur_quantity)
             if rel != []:
-                positives = len([x for x in rel if x.sign == "positive" and cur_quantity.derivative == "plus" and self.find_value(state, x.origin).magnitude == "plus"])
-                negatives = len([x for x in rel if x.sign == "negative" and cur_quantity.derivative == "plus" and self.find_value(state, x.origin).magnitude == "plus"])
+                # Number of positive incoming influences
+                positives = len([x for x in rel if x.sign == "positive" and self.find_value(state, x.origin).magnitude == "plus"])
+                # Number of negative incoming influences
+                negatives = len([x for x in rel if x.sign == "negative" and self.find_value(state, x.origin).magnitude == "plus"])
                 val = positives - negatives
                 if val == -1 and cur_quantity.derivative != "minus":
                     return False
@@ -67,17 +71,21 @@ class QRReasoner():
 
         for relation in self.dcs:
             # Remove violations of the value correspondences
+            org = self.find_value(state, relation.origin)
+            tar = self.find_value(state, relation.target)
             if relation.name == "VC":
-                org = self.find_value(state, relation.origin)
-                tar = self.find_value(state, relation.target)
-                print(org.magnitude, tar.magnitude)
-                if org.magnitude != relation.origin_value and tar.magnitude != relation.target_value:
+                if org.magnitude == relation.origin_value and tar.magnitude != relation.target_value:
                     return False
-
+            if relation.name == "Proportional":
+                if relation.sign == "positive" and org.derivative != tar.derivative:
+                    return False
         return True
 
     def think(self):
         all_states = self.generate_states()
         print("All states: {}".format(len(all_states)))
-        valid_states = [state for state in all_states if self.check_state(state)]
-        print("Left over states: {}".format(len(valid_states)))
+        valid_states = [
+            state for state in all_states if self.check_state(state)]
+
+        print("Reduced to: {}".format(len(valid_states)))
+        return valid_states

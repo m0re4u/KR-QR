@@ -67,11 +67,11 @@ def main(filename):
     #             transitions.append(trans)
     #         if state not in state_list:
     #             unseen_states.append(state)
-    # with open(filename, "wb") as outfile:
-    #     pickle.dump({"states": state_list, "transitions": transitions}, outfile)
 
-    res = rs.think()
-    print(res)
+    state_list = rs.think()
+    transitions = []
+    with open(filename, "wb") as outfile:
+        pickle.dump({"states": state_list, "transitions": transitions}, outfile)
 
 
 if __name__ == '__main__':
