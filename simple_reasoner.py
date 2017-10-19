@@ -116,7 +116,7 @@ class Simple_QRReasoner():
             # record the transitions from states to both new and already
             # existing states.
             for next_state in next_states:
-                if next_state not in [x[1] for x in valid_states]:
+                if next_state not in [x[1] for x in valid_states] and next_state not in [y[1] for y in unprocessed_states]:
                     state_counter += 1
                     unprocessed_states.append((state_counter, next_state))
                     transitions.append((index, state_counter))
@@ -124,4 +124,5 @@ class Simple_QRReasoner():
                     for i, val in valid_states:
                         if next_state == val:
                             transitions.append((index, i))
+        print(valid_states)
         return valid_states, transitions
