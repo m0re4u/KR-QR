@@ -100,6 +100,8 @@ def main(filename):
     simrs = simple_reasoner.Simple_QRReasoner(model_qns, model_dcs)
 
     state_list, transitions = simrs.think(model_instances)
+    with open(filename, "wb") as outfile:
+        pickle.dump({"states": state_list, "transitions": transitions}, outfile)
 
 
 if __name__ == '__main__':

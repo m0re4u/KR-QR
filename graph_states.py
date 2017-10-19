@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 
 import quantities as qn
 import dependencies as dp
-import reasoner
 
 
 def draw_nodes(states, transitions):
@@ -21,8 +20,9 @@ def draw_nodes(states, transitions):
         G.add_edge(transition[0], transition[1])
 
     # draw graph
-    pos = nx.shell_layout(G)
+    pos = nx.circular_layout(G)
     nx.draw_networkx_nodes(G, pos, node_size=600)
+    nx.draw_networkx_edges(G, pos)
     nx.draw_networkx_labels(G, pos, labels)
 
     # show graph

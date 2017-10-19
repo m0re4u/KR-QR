@@ -41,8 +41,12 @@ class Simple_QRReasoner():
             new_states.append(deepcopy(state))
         return new_states
 
-    def process_proportional(self, state):
-        pass
+    def process_proportional(self, state, rule):
+        new_states = []
+        if state.get_value(rule.origin)[1] > 0:
+            state.set_value(rule.target, "derivative", "plus")
+            new_states.append(deepcopy(state))
+        return new_states
 
     def check_vc(self, states):
         return states
@@ -54,23 +58,24 @@ class Simple_QRReasoner():
             if rule.name == "Influence":
                 newstates.extend(self.process_influence(state, rule))
             elif rule.name == "Proportional":
-                self.process_proportional(state)
+                newstates.extend(self.process_proportional(state, rule))
         return newstates
 
     def think(self, model_instance):
         """
         Generates possible states based on the model quantities, their
         relations and an initial state.
-        TODO: store transitions between states
         """
-        unprocessed_states = [deepcopy(model_instance)]
+        unprocessed_states = [(0, deepcopy(model_instance))]
         valid_states = []
+        state_counter = 0
+        transitions = []
         while unprocessed_states != []:
-            state = unprocessed_states.pop()
-            print("current state:", state)
+            index, state = unprocessed_states.pop()
+            print("current state: {} --> {}".format(index, state))
             # Assign the current state as processed
-            if state not in valid_states:
-                valid_states.append(deepcopy(state))
+            if (index, state) not in valid_states:
+                valid_states.append((index, deepcopy(state)))
             # Generate new states using just the quantities
             todos = self.process_quantities(deepcopy(state))
 
@@ -80,6 +85,9 @@ class Simple_QRReasoner():
             # Check if the valuecorrespondence still holds
             next_states = self.check_vc(todos)
             # Update unprocessed state with the state that are not processed yet
-            unprocessed_states.extend([x for x in next_states if x not in valid_states])
-
-        return None, None
+            for next_state in next_states:
+                if next_state not in [x[1] for x in valid_states]:
+                    state_counter += 1
+                    unprocessed_states.append((state_counter, next_state))
+                    transitions.append((index, state_counter))
+        return valid_states, transitions
