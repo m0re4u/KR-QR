@@ -34,36 +34,25 @@ class Simple_QRReasoner():
                 newstates.append(deepcopy(state))
         return newstates
 
-    def process_influence(self, state):
-        pass
+    def process_influence(self, state, rule):
+        new_states = []
+        if state.get_value(rule.origin)[0] > 0:
+            state.set_value(rule.target, "derivative", "plus")
+            new_states.append(deepcopy(state))
+        return new_states
 
     def process_proportional(self, state):
         pass
 
     def check_vc(self, states):
-        valid_states = []
-        for rule in self.dcs:
-            for state in states:
-                valid = False
-                if rule.name == "VC":
-                    for value in state.instances:
-                        if value.quantity == rule.origin and value.magnitude == rule.origin_value:
-                            if state.get_value(rule.target)[0] == rule.target_value:
-                                valid = True
-                            else:
-                                valid = False
-                        else:
-                            valid = True
-                if valid:
-                    valid_states.append(state)
-        return valid_states
+        return states
 
     def process_relations(self, state):
         # for each rule, check if its application leads to a new state
         newstates = []
         for rule in self.dcs:
             if rule.name == "Influence":
-                self.process_influence(state)
+                newstates.extend(self.process_influence(state, rule))
             elif rule.name == "Proportional":
                 self.process_proportional(state)
         return newstates
@@ -89,8 +78,8 @@ class Simple_QRReasoner():
             todos.extend(self.process_relations(deepcopy(state)))
 
             # Check if the valuecorrespondence still holds
-            # next_states = self.check_vc(todos)
+            next_states = self.check_vc(todos)
             # Update unprocessed state with the state that are not processed yet
-            unprocessed_states.extend([x for x in todos if x not in valid_states])
+            unprocessed_states.extend([x for x in next_states if x not in valid_states])
 
         return None, None

@@ -105,6 +105,17 @@ class Model():
             if value.quantity == key:
                 return (value.magnitude, value.derivative)
 
+    def set_value(self, key, field, value):
+        """
+        Set the value of a QuantityInstance index by a quantity
+        """
+        for instance in self.instances:
+            if instance.quantity == key:
+                if field == "magnitude":
+                    instance.magnitude = value
+                if field == "derivative":
+                    instance.derivative = value
+
     def __eq__(self, other):
         eq_list = []
         for instance in self.instances:
