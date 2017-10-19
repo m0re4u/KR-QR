@@ -196,7 +196,6 @@ class Forward_QRReasoner():
                 if ch:
                     # We applied the influence rule, so put the new state in
                     # a list of newly generated states.
-                    # print("Applied influence")
                     new_states.append(updated_state)
                     # Continue with applying other rules with the original
                     # state
@@ -207,11 +206,16 @@ class Forward_QRReasoner():
                 if ch:
                     # We applied the proportional rule, so put the new state in
                     # a list of newly generated states.
-                    # print("Applied proportional")
                     new_states.append(updated_state)
                     # Continue with applying other rules with the original
                     # state
                     state = deepcopy(original_state)
+
+        # Value correspondence check
+        for state in new_states:
+            vcs = [x for x in self.dcs if x.name == "VC"]
+            for vc in vcs:
+                print(vc)
 
         # Nothing happened, return the unchanged state
         return new_states

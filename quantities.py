@@ -1,7 +1,8 @@
 # author: Michiel van der Meer - 2017
 # Knowledge Representation course, QR project
 
-DERIV_ALPHABET = ["minus", "zero", "plus"]
+DERIV_ALPHABET = {"minus": -1, "zero": 0, "plus": 1}
+INV_DERIV_ALPHABET = dict({v: k for k, v in DERIV_ALPHABET.items()})
 
 
 class Quantity():
@@ -16,6 +17,7 @@ class Quantity():
         # The alphabet is in the form of a dict, to allow for the
         # Quantity[value] representation.
         self.alphabet = alphabet
+        self.inv_alphabet = dict({v: k for k, v in alphabet.items()})
 
     def __repr__(self):
         return "{} has possible values: {}".format(self.name, list(self.alphabet.keys()))
@@ -29,21 +31,39 @@ class QuantityInstance():
     Creates an instance of a quantity, giving it a value for the magnitude and
     the derivative
     """
+    def check_magnitude(self, value):
+        if value not in self.quantity.alphabet and value not in self.quantity.inv_alphabet:
+            if not isinstance(value, int):
+                value = self.quantity.inv_alphabet[value]
+            if value > max(list(self.quantity.alphabet.values())):
+                return max(list(self.quantity.alphabet.values()))
+            raise ValueError("{} is not a value in {}\'s alphabet: {}".format(
+                value, self.quantity.name, list(self.quantity.alphabet.keys()) + list(self.quantity.inv_alphabet.keys())
+            ))
+        if isinstance(value, str):
+            return self.quantity.alphabet[value]
+        else:
+            return value
+
+    def check_derivative(self, value):
+        if value not in DERIV_ALPHABET and value not in INV_DERIV_ALPHABET:
+            raise ValueError("{} is not a value in {}\'s derivative alphabet: {}".format(
+                value, self.quantity.name, list(DERIV_ALPHABET.keys()) + list(INV_DERIV_ALPHABET.keys())
+            ))
+        if isinstance(value, str):
+            return DERIV_ALPHABET[value]
+        else:
+            return value
+
     def __init__(self, quantity, magnitude, derivative):
         self.quantity = quantity
-        if magnitude not in self.quantity.alphabet:
-            raise ValueError("Not a value in {}\'s alphabet: {}".format(
-                self.quantity.name, list(self.quantity.alphabet.keys())
-            ))
-        if derivative not in DERIV_ALPHABET:
-            raise ValueError("Not a valid value for a derivative: {}".format(
-                DERIV_ALPHABET
-            ))
-        self.magnitude = magnitude
-        self.derivative = derivative
+        mag = self.check_magnitude(magnitude)
+        deriv = self.check_derivative(derivative)
+        self.magnitude = mag
+        self.derivative = deriv
 
     def __repr__(self):
-        return "{} ({}, {})".format(self.quantity.name, self.magnitude, self.derivative)
+        return "{} ({}, {})".format(self.quantity.name, self.quantity.inv_alphabet[self.magnitude], INV_DERIV_ALPHABET[self.derivative])
 
     def __eq__(self, other):
         return self.quantity == other.quantity and \
@@ -55,10 +75,7 @@ class QuantityInstance():
 
     @magnitude.setter
     def magnitude(self, mag):
-        if mag not in self.quantity.alphabet:
-            raise ValueError("Not a value in {}\'s alphabet: {}".format(
-                self.quantity.name, list(self.quantity.alphabet.keys())
-            ))
+        mag = self.check_magnitude(mag)
         self.__magnitude = mag
 
     @property
@@ -67,8 +84,41 @@ class QuantityInstance():
 
     @derivative.setter
     def derivative(self, deriv):
-        if deriv not in DERIV_ALPHABET:
-            raise ValueError("Not a value in {}\'s alphabet: {}".format(
-                self.quantity.name, list(DERIV_ALPHABET)
-            ))
+        deriv = self.check_derivative(deriv)
         self.__derivative = deriv
+
+
+class Model():
+    """
+    Defines a instansiation of the world, where every Quantity as defined in the
+    world should have a corresponding QuantityInstance
+    """
+    def __init__(self, quantities, instances):
+        self.qns = quantities
+        self.instances = instances
+
+    def get_value(self, key):
+        """
+        Return the QuantityInstance if the key is a valid quantity
+        """
+        for value in self.instances:
+            if value.quantity == key:
+                return (value.magnitude, value.derivative)
+
+    def __eq__(self, other):
+        eq_list = []
+        for instance in self.instances:
+            found = []
+            for oth_instance in other.instances:
+                if instance == oth_instance:
+                    found.append(True)
+                else:
+                    found.append(False)
+            if any(found):
+                eq_list.append(True)
+            else:
+                eq_list.append(False)
+        return all(eq_list)
+
+    def __repr__(self):
+        return "Model --> {}".format(self.instances)
