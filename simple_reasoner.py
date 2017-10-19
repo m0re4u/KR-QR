@@ -37,14 +37,17 @@ class Simple_QRReasoner():
     def process_influence(self, state, rule):
         new_states = []
         if state.get_value(rule.origin)[0] > 0:
-            state.set_value(rule.target, "derivative", "plus")
+            state.increase_value(rule.target, "derivative")
             new_states.append(deepcopy(state))
         return new_states
 
     def process_proportional(self, state, rule):
         new_states = []
         if state.get_value(rule.origin)[1] > 0:
-            state.set_value(rule.target, "derivative", "plus")
+            state.increase_value(rule.target, "derivative")
+            new_states.append(deepcopy(state))
+        if state.get_value(rule.origin)[1] < 0:
+            state.decrease_value(rule.target, "derivative")
             new_states.append(deepcopy(state))
         return new_states
 

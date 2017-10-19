@@ -31,29 +31,26 @@ class QuantityInstance():
     Creates an instance of a quantity, giving it a value for the magnitude and
     the derivative
     """
-    def check_magnitude(self, value):
-        if value not in self.quantity.alphabet and value not in self.quantity.inv_alphabet:
-            if not isinstance(value, int):
-                value = self.quantity.inv_alphabet[value]
-            if value > max(list(self.quantity.alphabet.values())):
-                return max(list(self.quantity.alphabet.values()))
-            raise ValueError("{} is not a value in {}\'s alphabet: {}".format(
-                value, self.quantity.name, list(self.quantity.alphabet.keys()) + list(self.quantity.inv_alphabet.keys())
-            ))
-        if isinstance(value, str):
-            return self.quantity.alphabet[value]
+
+    def check_value(self, value, alphabet, inv_alphabet):
+        if value not in alphabet and value not in inv_alphabet:
+            test_value = value
+            if not isinstance(test_value, int):
+                test_value = inv_alphabet[value]
+            if test_value > max(list(alphabet.values())):
+                return max(list(alphabet.values()))
+            elif test_value < min(list(alphabet.values())):
+                return min(list(alphabet.values()))
+        elif isinstance(value, str):
+            return alphabet[value]
         else:
             return value
 
+    def check_magnitude(self, value):
+        return self.check_value(value, self.quantity.alphabet, self.quantity.inv_alphabet)
+
     def check_derivative(self, value):
-        if value not in DERIV_ALPHABET and value not in INV_DERIV_ALPHABET:
-            raise ValueError("{} is not a value in {}\'s derivative alphabet: {}".format(
-                value, self.quantity.name, list(DERIV_ALPHABET.keys()) + list(INV_DERIV_ALPHABET.keys())
-            ))
-        if isinstance(value, str):
-            return DERIV_ALPHABET[value]
-        else:
-            return value
+        return self.check_value(value, DERIV_ALPHABET, INV_DERIV_ALPHABET)
 
     def __init__(self, quantity, magnitude, derivative):
         self.quantity = quantity
@@ -107,14 +104,36 @@ class Model():
 
     def set_value(self, key, field, value):
         """
-        Set the value of a QuantityInstance index by a quantity
+        Set the value of a QuantityInstance indexed by a quantity
         """
         for instance in self.instances:
             if instance.quantity == key:
                 if field == "magnitude":
                     instance.magnitude = value
-                if field == "derivative":
+                elif field == "derivative":
                     instance.derivative = value
+
+    def lower_value(self, key, field):
+        """
+        Lower the value of a QuantityInstance indexed by a quantity
+        """
+        for instance in self.instances:
+            if instance.quantity == key:
+                if field == "magnitude":
+                    instance.magnitude -= 1
+                elif field == "derivative":
+                    instance.derivative -= 1
+
+    def increase_value(self, key, field):
+        """
+        Increase the value of a QuantityInstance indexed by a quantity
+        """
+        for instance in self.instances:
+            if instance.quantity == key:
+                if field == "magnitude":
+                    instance.magnitude += 1
+                elif field == "derivative":
+                    instance.derivative += 1
 
     def __eq__(self, other):
         eq_list = []
