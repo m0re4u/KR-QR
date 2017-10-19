@@ -36,23 +36,48 @@ class Simple_QRReasoner():
 
     def process_influence(self, state, rule):
         new_states = []
-        if state.get_value(rule.origin)[0] > 0:
-            state.increase_value(rule.target, "derivative")
-            new_states.append(deepcopy(state))
+        if rule.sign == "positive":
+            if state.get_value(rule.origin)[0] > 0:
+                new_state = deepcopy(state)
+                new_state.increase_value(rule.target, "derivative")
+                new_states.append(new_state)
+        elif rule.sign == "negative":
+            if state.get_value(rule.origin)[0] > 0:
+                new_state = deepcopy(state)
+                new_state.decrease_value(rule.target, "derivative")
+                new_states.append(new_state)
         return new_states
 
     def process_proportional(self, state, rule):
         new_states = []
-        if state.get_value(rule.origin)[1] > 0:
-            state.increase_value(rule.target, "derivative")
-            new_states.append(deepcopy(state))
-        if state.get_value(rule.origin)[1] < 0:
-            state.decrease_value(rule.target, "derivative")
-            new_states.append(deepcopy(state))
+        if rule.sign == "positive":
+            if state.get_value(rule.origin)[1] > 0:
+                new_state = deepcopy(state)
+                new_state.increase_value(rule.target, "derivative")
+                new_states.append(new_state)
+            if state.get_value(rule.origin)[1] < 0:
+                new_state = deepcopy(state)
+                new_state.decrease_value(rule.target, "derivative")
+                new_states.append(deepcopy(new_state))
+
         return new_states
 
     def check_vc(self, states):
-        return states
+        valid = []
+        for state in states:
+            all_hold = []
+            for rule in self.dcs:
+                if rule.name == "VC":
+                    if state.get_value(rule.origin)[0] == rule.origin_value:
+                        if state.get_value(rule.target)[0] != rule.target_value:
+                            all_hold.append(False)
+                        else:
+                            all_hold.append(True)
+                    else:
+                        all_hold.append(True)
+            if all(all_hold):
+                valid.append(state)
+        return valid
 
     def process_relations(self, state):
         # for each rule, check if its application leads to a new state
@@ -87,10 +112,16 @@ class Simple_QRReasoner():
 
             # Check if the valuecorrespondence still holds
             next_states = self.check_vc(todos)
-            # Update unprocessed state with the state that are not processed yet
+            # Update the list of states that needs to be processed, and
+            # record the transitions from states to both new and already
+            # existing states.
             for next_state in next_states:
                 if next_state not in [x[1] for x in valid_states]:
                     state_counter += 1
                     unprocessed_states.append((state_counter, next_state))
                     transitions.append((index, state_counter))
+                else:
+                    for i, val in valid_states:
+                        if next_state == val:
+                            transitions.append((index, i))
         return valid_states, transitions

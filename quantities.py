@@ -113,7 +113,7 @@ class Model():
                 elif field == "derivative":
                     instance.derivative = value
 
-    def lower_value(self, key, field):
+    def decrease_value(self, key, field):
         """
         Lower the value of a QuantityInstance indexed by a quantity
         """

@@ -33,7 +33,7 @@ def main(filename):
     with open(filename, "rb") as f:
         print("Opening {}".format(filename))
         data = pickle.load(f)
-    print("Loaded data!")
+    print("Loaded data: {} states and {} transitions!".format(len(data["states"]), len(data["transitions"])))
     draw_nodes(data["states"], data["transitions"])
 
 
