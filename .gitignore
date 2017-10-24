@@ -103,3 +103,4 @@ ENV/
 # pickle files
 *.pik
 jasper/
+graphs/
