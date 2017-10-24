@@ -4,7 +4,7 @@ import pickle
 import argparse
 import networkx as nx
 import matplotlib.pyplot as plt
-import pygraphviz
+from graphviz import Digraph
 import subprocess
 
 import quantities as qn
@@ -12,27 +12,18 @@ import dependencies as dp
 
 
 def draw(states, transitions):
-    G = nx.DiGraph()
+    G = Digraph()
     labels = {}
     for i, state in states:
-        G.add_node(i)
-        label_str = ""
+        label_str = "State: {}\n".format(i)
         for value in state.instances:
             label_str += "{}\n".format(value)
-
-        labels[i] = "{}".format(label_str)
+        G.node(str(i), label_str)
 
     for transition in transitions:
-        G.add_edge(transition[0], transition[1])
+        G.edge(str(transition[0]), str(transition[1]))
 
-    A = nx.drawing.nx_agraph.to_agraph(G)
-    nx.drawing.nx_agraph.write_dot(G, "graph.dot")
-
-    try:
-        subprocess.call(["dot", "-Tpng", "-ograph.png", "graph.dot"])
-    except OSError as e:
-        print("Error: {}".format(e))
-        exit()
+    G.render('graphs/graph.gv', view=True)
 
 
 def main(filename):

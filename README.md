@@ -3,7 +3,7 @@
 ## Requirements
 ### Python packages
 - [networkx](https://networkx.github.io/)
-- [pygraphviz](http://pygraphviz.github.io/)
+- [graphviz](https://pypi.python.org/pypi/graphviz)
 
 ### Programs
 - [graphviz](http://www.graphviz.org/)
@@ -18,4 +18,4 @@ This command generated a file that contains all the states, and the possible tra
 ```bash
 python3 graph_states [-f INFILE]
 ```
-The visualization of the state graph uses graphviz, and assumes it is installed and the `dot` command is accessible. 
+The visualization of the state graph uses graphviz.
