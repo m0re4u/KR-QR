@@ -89,6 +89,13 @@ class Simple_QRReasoner():
                 newstates.extend(self.process_proportional(state, rule))
         return newstates
 
+    def remove_reflections(self, transitions):
+        clean = []
+        for transition in transitions:
+            if transition[0] != transition[1]:
+                clean.append(transition)
+        return clean
+
     def think(self, model_instance):
         """
         Generates possible states based on the model quantities, their
@@ -124,5 +131,5 @@ class Simple_QRReasoner():
                     for i, val in valid_states:
                         if next_state == val:
                             transitions.append((index, i))
-        print(valid_states)
-        return valid_states, transitions
+        nonref_trans = self.remove_reflections(transitions)
+        return valid_states, nonref_trans
