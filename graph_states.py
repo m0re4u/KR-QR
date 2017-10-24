@@ -4,13 +4,14 @@ import pickle
 import argparse
 import networkx as nx
 import matplotlib.pyplot as plt
-from networkx.drawing.nx_agraph import to_agraph
+import pygraphviz
+import subprocess
 
 import quantities as qn
 import dependencies as dp
 
 
-def draw_nodes(states, transitions):
+def draw(states, transitions):
     G = nx.DiGraph()
     labels = {}
     for i, state in states:
@@ -24,18 +25,14 @@ def draw_nodes(states, transitions):
     for transition in transitions:
         G.add_edge(transition[0], transition[1])
 
-    A = to_agraph(G)
-    # draw graph
-    # k controls the distance between the nodes and varies between 0 and 1
-    # iterations is the number of times simulated annealing is run
-    # pos = graphviz_layout(G)
-    # pos = nx.spring_layout(G, k=0.50, iterations=50)
-    # nx.draw_networkx_nodes(G, pos, node_size=1000, node_shape="8")
-    # nx.draw_networkx_edges(G, pos)
-    # nx.draw_networkx_labels(G, pos, labels, font_size=8)
+    A = nx.drawing.nx_agraph.to_agraph(G)
+    nx.drawing.nx_agraph.write_dot(G, "graph.dot")
 
-    # # show graph
-    plt.show()
+    try:
+        subprocess.call(["dot", "-Tpng", "-ograph.png", "graph.dot"])
+    except OSError as e:
+        print("Error: {}".format(e))
+        exit()
 
 
 def main(filename):
@@ -43,7 +40,7 @@ def main(filename):
         print("Opening {}".format(filename))
         data = pickle.load(f)
     print("Loaded data: {} states and {} transitions!".format(len(data["states"]), len(data["transitions"])))
-    draw_nodes(data["states"], data["transitions"])
+    draw(data["states"], data["transitions"])
 
 
 if __name__ == '__main__':
