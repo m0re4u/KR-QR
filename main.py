@@ -8,8 +8,9 @@ from copy import deepcopy
 import quantities as qn
 import dependencies as dp
 import simple_reasoner
+from simple_reasoner import TERMINAL_ROWS, TERMINAL_COLUMNS
 
-TERMINAL_ROWS, TERMINAL_COLUMNS = os.popen('stty size', 'r').read().split()
+# TERMINAL_ROWS, TERMINAL_COLUMNS = os.popen('stty size', 'r').read().split()
 
 
 def main(filename):
@@ -46,7 +47,8 @@ def main(filename):
 
     print("=" * int(TERMINAL_COLUMNS))
     # Simple reasoner
-    print("Starting simple reasoner")
+    print("| Starting Reasoner, reasoning forward from starting state")
+    print("=" * int(TERMINAL_COLUMNS))
     simrs = simple_reasoner.Simple_QRReasoner(model_qns, model_dcs)
 
     state_list, transitions = simrs.think(model_instances)

@@ -1,7 +1,9 @@
 # author: Michiel van der Meer - 2017
 # Knowledge Representation course, QR project
+import os
 import quantities as qn
 from copy import deepcopy
+TERMINAL_ROWS, TERMINAL_COLUMNS = os.popen('stty size', 'r').read().split()
 
 
 class Simple_QRReasoner():
@@ -29,10 +31,14 @@ class Simple_QRReasoner():
                 new_state = deepcopy(state)
                 new_state.increase_value(quantity_value.quantity, "magnitude")
                 new_states.append(new_state)
+                # TRACE PRINT
+                print("Positive derivative leads to increased magnitude on {} | {} ---> {}".format(quantity_value.quantity.name, state, new_state))
             if quantity_value.derivative < 0:
                 new_state = deepcopy(state)
                 new_state.decrease_value(quantity_value.quantity, "magnitude")
                 new_states.append(new_state)
+                # TRACE PRINT
+                print("Negative derivative leads to decreased magnitude on {} | {} ---> {}".format(quantity_value.quantity.name, state, new_state))
         return new_states
 
     def process_influence(self, state, rule):
@@ -42,11 +48,15 @@ class Simple_QRReasoner():
                 new_state = deepcopy(state)
                 new_state.increase_value(rule.target, "derivative")
                 new_states.append(new_state)
+                # TRACE PRINT
+                print("Positive influence between {} and {} leads to increased derivative on {} | {} ---> {}".format(rule.origin.name, rule.target.name, rule.target.name, state, new_state))
         elif rule.sign == "negative":
             if state.get_value(rule.origin)[0] > 0:
                 new_state = deepcopy(state)
                 new_state.decrease_value(rule.target, "derivative")
                 new_states.append(new_state)
+                # TRACE PRINT
+                print("Negative influence between {} and {} leads to decreased derivative on {} | {} ---> {}".format(rule.origin.name, rule.target.name, rule.target.name, state, new_state))
         return new_states
 
     def process_proportional(self, state, rule):
@@ -56,10 +66,14 @@ class Simple_QRReasoner():
                 new_state = deepcopy(state)
                 new_state.increase_value(rule.target, "derivative")
                 new_states.append(new_state)
+                # TRACE PRINT
+                print("Positive proportionality between {} and {} leads to increased derivative on {} | {} ---> {}".format(rule.origin.name, rule.target.name, rule.target.name, state, new_state))
             if state.get_value(rule.origin)[1] < 0:
                 new_state = deepcopy(state)
                 new_state.decrease_value(rule.target, "derivative")
                 new_states.append(deepcopy(new_state))
+                # TRACE PRINT
+                print("Negative proportionality between {} and {} leads to dcreased derivative on {} | {} ---> {}".format(rule.origin.name, rule.target.name, rule.target.name, state, new_state))
 
         return new_states
 
@@ -72,6 +86,8 @@ class Simple_QRReasoner():
                     if state.get_value(rule.origin)[0] == rule.origin_value:
                         if state.get_value(rule.target)[0] != rule.target_value:
                             all_hold.append(False)
+                            # TRACE PRINT
+                            print("{} removed because of not following value correspondence".format(state))
                         else:
                             all_hold.append(True)
                     else:
@@ -92,9 +108,15 @@ class Simple_QRReasoner():
 
     def remove_reflections(self, transitions):
         clean = []
+        n = 0
+        print(len(transitions))
         for transition in transitions:
             if transition[0] != transition[1]:
                 clean.append(transition)
+            else:
+                n += 1
+        # TRACE PRINT
+        print("Removed {} reflective transitions and duplicates".format(n))
         return clean
 
     def think(self, model_instance):
@@ -108,6 +130,7 @@ class Simple_QRReasoner():
         transitions = []
         while unprocessed_states != []:
             index, state = unprocessed_states.pop()
+            print("-" * int(TERMINAL_COLUMNS))
             print("Check for future states from current state: {} - {}".format(index, state))
             # Assign the current state as processed
             if (index, state) not in valid_states:

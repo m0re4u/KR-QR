@@ -151,4 +151,4 @@ class Model():
         return all(eq_list)
 
     def __repr__(self):
-        return "Model --> {}".format(self.instances)
+        return "State: {}".format(self.instances)
