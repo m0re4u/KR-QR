@@ -23,16 +23,17 @@ class Simple_QRReasoner():
         Generate new states given some states, only based on the quantities and
         their derivatives.
         """
-        original = deepcopy(state)
-        newstates = []
+        new_states = []
         for quantity_value in state.instances:
             if quantity_value.derivative > 0:
-                quantity_value.magnitude += 1
-                newstates.append(deepcopy(state))
+                new_state = deepcopy(state)
+                new_state.increase_value(quantity_value.quantity, "magnitude")
+                new_states.append(new_state)
             if quantity_value.derivative < 0:
-                quantity_value.magnitude -= 1
-                newstates.append(deepcopy(state))
-        return newstates
+                new_state = deepcopy(state)
+                new_state.decrease_value(quantity_value.quantity, "magnitude")
+                new_states.append(new_state)
+        return new_states
 
     def process_influence(self, state, rule):
         new_states = []
@@ -107,13 +108,12 @@ class Simple_QRReasoner():
         transitions = []
         while unprocessed_states != []:
             index, state = unprocessed_states.pop()
-            print("current state: {} --> {}".format(index, state))
+            print("Check for future states from current state: {} - {}".format(index, state))
             # Assign the current state as processed
             if (index, state) not in valid_states:
                 valid_states.append((index, deepcopy(state)))
             # Generate new states using just the quantities
             todos = self.process_quantities(deepcopy(state))
-
             # Generate new states using the relations
             todos.extend(self.process_relations(deepcopy(state)))
 
