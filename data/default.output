@@ -1,0 +1,282 @@
+Model created!
+=============================================================================================================================================================================================
+| Starting Reasoner, reasoning forward from starting state
+=============================================================================================================================================================================================
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 0 - State: [Inflow (zero, plus), Volume (zero, zero), Outflow (zero, zero)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (zero, plus), Volume (zero, zero), Outflow (zero, zero)] ---> State: [Inflow (plus, plus), Volume (zero, zero), Outflow (zero, zero)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 1 - State: [Inflow (plus, plus), Volume (zero, zero), Outflow (zero, zero)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (zero, zero), Outflow (zero, zero)] ---> State: [Inflow (plus, plus), Volume (zero, zero), Outflow (zero, zero)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (zero, zero), Outflow (zero, zero)] ---> State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, zero)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 2 - State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, zero)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, zero)] ---> State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, zero)]
+Positive derivative leads to increased magnitude on Volume | State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, zero)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, zero)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, zero)] ---> State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, zero)]
+Positive proportionality between Volume and Outflow leads to increased derivative on Outflow | State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, zero)] ---> State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, plus)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 4 - State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, plus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, plus)] ---> State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, plus)]
+Positive derivative leads to increased magnitude on Volume | State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, plus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, plus)]
+Positive derivative leads to increased magnitude on Outflow | State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, plus)] ---> State: [Inflow (plus, plus), Volume (zero, plus), Outflow (plus, plus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, plus)] ---> State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, plus)]
+Positive proportionality between Volume and Outflow leads to increased derivative on Outflow | State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, plus)] ---> State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, plus)]
+State: [Inflow (plus, plus), Volume (zero, plus), Outflow (plus, plus)] removed because of not following value correspondence
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 5 - State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, plus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, plus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, plus)]
+Positive derivative leads to increased magnitude on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, plus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (zero, plus)]
+Positive derivative leads to increased magnitude on Outflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, plus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, plus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, plus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, plus)]
+Positive proportionality between Volume and Outflow leads to increased derivative on Outflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, plus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, plus)]
+State: [Inflow (plus, plus), Volume (max, plus), Outflow (zero, plus)] removed because of not following value correspondence
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 6 - State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, plus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, plus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, plus)]
+Positive derivative leads to increased magnitude on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, plus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (plus, plus)]
+Positive derivative leads to increased magnitude on Outflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, plus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, plus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, plus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, plus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, plus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, plus)]
+Positive proportionality between Volume and Outflow leads to increased derivative on Outflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, plus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, plus)]
+State: [Inflow (plus, plus), Volume (max, plus), Outflow (plus, plus)] removed because of not following value correspondence
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 8 - State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, plus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, plus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, plus)]
+Positive derivative leads to increased magnitude on Outflow | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, plus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, plus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, plus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, plus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, plus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, plus)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 10 - State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, plus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, plus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, plus)]
+Negative derivative leads to decreased magnitude on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, plus)] ---> State: [Inflow (plus, plus), Volume (zero, minus), Outflow (plus, plus)]
+Positive derivative leads to increased magnitude on Outflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, plus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, plus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, plus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, plus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, plus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, plus)]
+Negative proportionality between Volume and Outflow leads to dcreased derivative on Outflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, plus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, zero)]
+State: [Inflow (plus, plus), Volume (zero, minus), Outflow (plus, plus)] removed because of not following value correspondence
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 12 - State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, zero)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, zero)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, zero)]
+Negative derivative leads to decreased magnitude on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, zero)] ---> State: [Inflow (plus, plus), Volume (zero, minus), Outflow (plus, zero)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, zero)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, zero)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, zero)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, zero)]
+Negative proportionality between Volume and Outflow leads to dcreased derivative on Outflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, zero)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, minus)]
+State: [Inflow (plus, plus), Volume (zero, minus), Outflow (plus, zero)] removed because of not following value correspondence
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 14 - State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, minus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, minus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, minus)]
+Negative derivative leads to decreased magnitude on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, minus)] ---> State: [Inflow (plus, plus), Volume (zero, minus), Outflow (plus, minus)]
+Negative derivative leads to decreased magnitude on Outflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, minus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (zero, minus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, minus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, minus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, minus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, minus)]
+Negative proportionality between Volume and Outflow leads to dcreased derivative on Outflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, minus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, minus)]
+State: [Inflow (plus, plus), Volume (zero, minus), Outflow (plus, minus)] removed because of not following value correspondence
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 16 - State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, minus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, minus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, minus)]
+Negative derivative leads to decreased magnitude on Outflow | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, minus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (zero, minus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, minus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, minus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, minus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, minus)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 18 - State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, minus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, minus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, minus)]
+Positive derivative leads to increased magnitude on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, minus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (plus, minus)]
+Negative derivative leads to decreased magnitude on Outflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, minus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, minus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, minus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, minus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, minus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, minus)]
+Positive proportionality between Volume and Outflow leads to increased derivative on Outflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, minus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, zero)]
+State: [Inflow (plus, plus), Volume (max, plus), Outflow (plus, minus)] removed because of not following value correspondence
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 20 - State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, zero)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, zero)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, zero)]
+Positive derivative leads to increased magnitude on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, zero)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (plus, zero)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, zero)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, zero)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, zero)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, zero)]
+Positive proportionality between Volume and Outflow leads to increased derivative on Outflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, zero)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, plus)]
+State: [Inflow (plus, plus), Volume (max, plus), Outflow (plus, zero)] removed because of not following value correspondence
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 19 - State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, minus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, minus)]
+Positive derivative leads to increased magnitude on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (zero, minus)]
+Negative derivative leads to decreased magnitude on Outflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, minus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, minus)]
+Positive proportionality between Volume and Outflow leads to increased derivative on Outflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, zero)]
+State: [Inflow (plus, plus), Volume (max, plus), Outflow (zero, minus)] removed because of not following value correspondence
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 17 - State: [Inflow (plus, plus), Volume (plus, zero), Outflow (zero, minus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (zero, minus)]
+Negative derivative leads to decreased magnitude on Outflow | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (zero, minus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, minus)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 15 - State: [Inflow (plus, plus), Volume (plus, minus), Outflow (zero, minus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (zero, minus)]
+Negative derivative leads to decreased magnitude on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (zero, minus), Outflow (zero, minus)]
+Negative derivative leads to decreased magnitude on Outflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (zero, minus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (zero, minus)]
+Negative proportionality between Volume and Outflow leads to dcreased derivative on Outflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (zero, minus)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 21 - State: [Inflow (plus, plus), Volume (zero, minus), Outflow (zero, minus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (zero, minus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (zero, minus), Outflow (zero, minus)]
+Negative derivative leads to decreased magnitude on Volume | State: [Inflow (plus, plus), Volume (zero, minus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (zero, minus), Outflow (zero, minus)]
+Negative derivative leads to decreased magnitude on Outflow | State: [Inflow (plus, plus), Volume (zero, minus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (zero, minus), Outflow (zero, minus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (zero, minus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (zero, zero), Outflow (zero, minus)]
+Negative proportionality between Volume and Outflow leads to dcreased derivative on Outflow | State: [Inflow (plus, plus), Volume (zero, minus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (zero, minus), Outflow (zero, minus)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 22 - State: [Inflow (plus, plus), Volume (zero, zero), Outflow (zero, minus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (zero, zero), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (zero, zero), Outflow (zero, minus)]
+Negative derivative leads to decreased magnitude on Outflow | State: [Inflow (plus, plus), Volume (zero, zero), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (zero, zero), Outflow (zero, minus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (zero, zero), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, minus)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 23 - State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, minus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, minus)]
+Positive derivative leads to increased magnitude on Volume | State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, minus)]
+Negative derivative leads to decreased magnitude on Outflow | State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, minus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, minus)]
+Positive proportionality between Volume and Outflow leads to increased derivative on Outflow | State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, minus)] ---> State: [Inflow (plus, plus), Volume (zero, plus), Outflow (zero, zero)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 13 - State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, zero)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, zero)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, zero)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, zero)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, zero)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, zero)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, zero)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 11 - State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, plus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, plus)]
+Negative derivative leads to decreased magnitude on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (zero, minus), Outflow (max, plus)]
+Positive derivative leads to increased magnitude on Outflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, plus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, plus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, plus)]
+Negative proportionality between Volume and Outflow leads to dcreased derivative on Outflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, zero)]
+State: [Inflow (plus, plus), Volume (zero, minus), Outflow (max, plus)] removed because of not following value correspondence
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 24 - State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, zero)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, zero)]
+Negative derivative leads to decreased magnitude on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (zero, minus), Outflow (max, zero)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, zero)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, zero)]
+Negative proportionality between Volume and Outflow leads to dcreased derivative on Outflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, minus)]
+State: [Inflow (plus, plus), Volume (zero, minus), Outflow (max, zero)] removed because of not following value correspondence
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 26 - State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, minus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, minus)]
+Negative derivative leads to decreased magnitude on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (zero, minus), Outflow (max, minus)]
+Negative derivative leads to decreased magnitude on Outflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (plus, minus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, minus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, minus)]
+Negative proportionality between Volume and Outflow leads to dcreased derivative on Outflow | State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, minus)]
+State: [Inflow (plus, plus), Volume (zero, minus), Outflow (max, minus)] removed because of not following value correspondence
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 27 - State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, minus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, minus)]
+Negative derivative leads to decreased magnitude on Outflow | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (plus, minus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, minus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, minus)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 28 - State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, minus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, minus)]
+Positive derivative leads to increased magnitude on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, minus)]
+Negative derivative leads to decreased magnitude on Outflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (plus, minus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, minus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, minus)]
+Positive proportionality between Volume and Outflow leads to increased derivative on Outflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, zero)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 30 - State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, zero)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, zero)]
+Positive derivative leads to increased magnitude on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, zero)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, zero)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, zero)]
+Positive proportionality between Volume and Outflow leads to increased derivative on Outflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, plus)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 31 - State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, zero)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, zero)]
+Positive derivative leads to increased magnitude on Volume | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, zero)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, zero)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, zero)]
+Positive proportionality between Volume and Outflow leads to increased derivative on Outflow | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, plus)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 33 - State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, plus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, plus)]
+Positive derivative leads to increased magnitude on Volume | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, plus)]
+Positive derivative leads to increased magnitude on Outflow | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, plus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, plus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, plus)]
+Positive proportionality between Volume and Outflow leads to increased derivative on Outflow | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, plus)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 34 - State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, plus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, plus)]
+Positive derivative leads to increased magnitude on Outflow | State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, plus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, plus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, plus)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 35 - State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, plus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, plus)]
+Negative derivative leads to decreased magnitude on Volume | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, plus)]
+Positive derivative leads to increased magnitude on Outflow | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, plus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, plus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, plus)]
+Negative proportionality between Volume and Outflow leads to dcreased derivative on Outflow | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, zero)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 36 - State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, zero)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, zero)]
+Negative derivative leads to decreased magnitude on Volume | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, zero)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, zero)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, zero)]
+Negative proportionality between Volume and Outflow leads to dcreased derivative on Outflow | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, minus)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 37 - State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, minus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, minus)]
+Negative derivative leads to decreased magnitude on Volume | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, minus)]
+Negative derivative leads to decreased magnitude on Outflow | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (max, minus), Outflow (plus, minus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, minus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, minus)]
+Negative proportionality between Volume and Outflow leads to dcreased derivative on Outflow | State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, minus)]
+State: [Inflow (plus, plus), Volume (max, minus), Outflow (plus, minus)] removed because of not following value correspondence
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 38 - State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, minus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, minus)]
+Negative derivative leads to decreased magnitude on Outflow | State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (max, zero), Outflow (plus, minus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, minus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, minus)]
+State: [Inflow (plus, plus), Volume (max, zero), Outflow (plus, minus)] removed because of not following value correspondence
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 32 - State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, zero)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, zero)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, zero)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (max, minus), Outflow (max, zero)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 29 - State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, minus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, minus)]
+Positive derivative leads to increased magnitude on Volume | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, minus)]
+Negative derivative leads to decreased magnitude on Outflow | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (plus, minus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, minus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (max, zero), Outflow (max, minus)]
+Positive proportionality between Volume and Outflow leads to increased derivative on Outflow | State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, minus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, zero)]
+State: [Inflow (plus, plus), Volume (max, plus), Outflow (plus, minus)] removed because of not following value correspondence
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 25 - State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, zero)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, zero)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, zero)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, zero)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, zero)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 9 - State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, plus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, plus)]
+Positive derivative leads to increased magnitude on Outflow | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, plus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, plus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (plus, minus), Outflow (max, plus)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 7 - State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, plus)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, plus)]
+Positive derivative leads to increased magnitude on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (max, plus)]
+Positive derivative leads to increased magnitude on Outflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, plus)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, plus)]
+Negative influence between Outflow and Volume leads to decreased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (plus, zero), Outflow (max, plus)]
+Positive proportionality between Volume and Outflow leads to increased derivative on Outflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, plus)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (max, plus)]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Check for future states from current state: 3 - State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, zero)]
+Positive derivative leads to increased magnitude on Inflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, zero)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, zero)]
+Positive derivative leads to increased magnitude on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, zero)] ---> State: [Inflow (plus, plus), Volume (max, plus), Outflow (zero, zero)]
+Positive influence between Inflow and Volume leads to increased derivative on Volume | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, zero)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, zero)]
+Positive proportionality between Volume and Outflow leads to increased derivative on Outflow | State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, zero)] ---> State: [Inflow (plus, plus), Volume (plus, plus), Outflow (zero, plus)]
+State: [Inflow (plus, plus), Volume (max, plus), Outflow (zero, zero)] removed because of not following value correspondence
+158
+Removed 88 reflective transitions and duplicates

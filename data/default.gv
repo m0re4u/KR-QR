@@ -1,0 +1,267 @@
+digraph {
+	0 [label="State: 0
+Inflow (zero, plus)
+Volume (zero, zero)
+Outflow (zero, zero)
+"]
+	1 [label="State: 1
+Inflow (plus, plus)
+Volume (zero, zero)
+Outflow (zero, zero)
+"]
+	2 [label="State: 2
+Inflow (plus, plus)
+Volume (zero, plus)
+Outflow (zero, zero)
+"]
+	4 [label="State: 4
+Inflow (plus, plus)
+Volume (zero, plus)
+Outflow (zero, plus)
+"]
+	5 [label="State: 5
+Inflow (plus, plus)
+Volume (plus, plus)
+Outflow (zero, plus)
+"]
+	6 [label="State: 6
+Inflow (plus, plus)
+Volume (plus, plus)
+Outflow (plus, plus)
+"]
+	8 [label="State: 8
+Inflow (plus, plus)
+Volume (plus, zero)
+Outflow (plus, plus)
+"]
+	10 [label="State: 10
+Inflow (plus, plus)
+Volume (plus, minus)
+Outflow (plus, plus)
+"]
+	12 [label="State: 12
+Inflow (plus, plus)
+Volume (plus, minus)
+Outflow (plus, zero)
+"]
+	14 [label="State: 14
+Inflow (plus, plus)
+Volume (plus, minus)
+Outflow (plus, minus)
+"]
+	16 [label="State: 16
+Inflow (plus, plus)
+Volume (plus, zero)
+Outflow (plus, minus)
+"]
+	18 [label="State: 18
+Inflow (plus, plus)
+Volume (plus, plus)
+Outflow (plus, minus)
+"]
+	20 [label="State: 20
+Inflow (plus, plus)
+Volume (plus, plus)
+Outflow (plus, zero)
+"]
+	19 [label="State: 19
+Inflow (plus, plus)
+Volume (plus, plus)
+Outflow (zero, minus)
+"]
+	17 [label="State: 17
+Inflow (plus, plus)
+Volume (plus, zero)
+Outflow (zero, minus)
+"]
+	15 [label="State: 15
+Inflow (plus, plus)
+Volume (plus, minus)
+Outflow (zero, minus)
+"]
+	21 [label="State: 21
+Inflow (plus, plus)
+Volume (zero, minus)
+Outflow (zero, minus)
+"]
+	22 [label="State: 22
+Inflow (plus, plus)
+Volume (zero, zero)
+Outflow (zero, minus)
+"]
+	23 [label="State: 23
+Inflow (plus, plus)
+Volume (zero, plus)
+Outflow (zero, minus)
+"]
+	13 [label="State: 13
+Inflow (plus, plus)
+Volume (plus, zero)
+Outflow (plus, zero)
+"]
+	11 [label="State: 11
+Inflow (plus, plus)
+Volume (plus, minus)
+Outflow (max, plus)
+"]
+	24 [label="State: 24
+Inflow (plus, plus)
+Volume (plus, minus)
+Outflow (max, zero)
+"]
+	26 [label="State: 26
+Inflow (plus, plus)
+Volume (plus, minus)
+Outflow (max, minus)
+"]
+	27 [label="State: 27
+Inflow (plus, plus)
+Volume (plus, zero)
+Outflow (max, minus)
+"]
+	28 [label="State: 28
+Inflow (plus, plus)
+Volume (plus, plus)
+Outflow (max, minus)
+"]
+	30 [label="State: 30
+Inflow (plus, plus)
+Volume (plus, plus)
+Outflow (max, zero)
+"]
+	31 [label="State: 31
+Inflow (plus, plus)
+Volume (max, plus)
+Outflow (max, zero)
+"]
+	33 [label="State: 33
+Inflow (plus, plus)
+Volume (max, plus)
+Outflow (max, plus)
+"]
+	34 [label="State: 34
+Inflow (plus, plus)
+Volume (max, zero)
+Outflow (max, plus)
+"]
+	35 [label="State: 35
+Inflow (plus, plus)
+Volume (max, minus)
+Outflow (max, plus)
+"]
+	36 [label="State: 36
+Inflow (plus, plus)
+Volume (max, minus)
+Outflow (max, zero)
+"]
+	37 [label="State: 37
+Inflow (plus, plus)
+Volume (max, minus)
+Outflow (max, minus)
+"]
+	38 [label="State: 38
+Inflow (plus, plus)
+Volume (max, zero)
+Outflow (max, minus)
+"]
+	32 [label="State: 32
+Inflow (plus, plus)
+Volume (max, zero)
+Outflow (max, zero)
+"]
+	29 [label="State: 29
+Inflow (plus, plus)
+Volume (max, plus)
+Outflow (max, minus)
+"]
+	25 [label="State: 25
+Inflow (plus, plus)
+Volume (plus, zero)
+Outflow (max, zero)
+"]
+	9 [label="State: 9
+Inflow (plus, plus)
+Volume (plus, zero)
+Outflow (max, plus)
+"]
+	7 [label="State: 7
+Inflow (plus, plus)
+Volume (plus, plus)
+Outflow (max, plus)
+"]
+	3 [label="State: 3
+Inflow (plus, plus)
+Volume (plus, plus)
+Outflow (zero, zero)
+"]
+	0 -> 1
+	1 -> 2
+	2 -> 3
+	2 -> 4
+	4 -> 5
+	5 -> 6
+	6 -> 7
+	6 -> 8
+	8 -> 9
+	8 -> 6
+	8 -> 10
+	10 -> 11
+	10 -> 8
+	10 -> 12
+	12 -> 13
+	12 -> 14
+	14 -> 15
+	14 -> 16
+	16 -> 17
+	16 -> 18
+	16 -> 14
+	18 -> 19
+	18 -> 16
+	18 -> 20
+	20 -> 6
+	17 -> 19
+	15 -> 21
+	15 -> 17
+	21 -> 22
+	22 -> 23
+	23 -> 19
+	23 -> 2
+	13 -> 20
+	13 -> 12
+	11 -> 24
+	24 -> 25
+	24 -> 26
+	26 -> 14
+	26 -> 27
+	27 -> 16
+	27 -> 28
+	27 -> 26
+	28 -> 29
+	28 -> 18
+	28 -> 27
+	28 -> 30
+	30 -> 31
+	31 -> 32
+	31 -> 33
+	33 -> 34
+	34 -> 33
+	34 -> 35
+	35 -> 11
+	35 -> 34
+	35 -> 36
+	36 -> 24
+	36 -> 37
+	37 -> 26
+	37 -> 38
+	38 -> 37
+	32 -> 31
+	32 -> 36
+	29 -> 38
+	29 -> 31
+	25 -> 30
+	25 -> 24
+	9 -> 11
+	7 -> 33
+	7 -> 9
+	3 -> 5
+}
